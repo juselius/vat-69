@@ -1,0 +1,6 @@
+*.mod
+*~
+*.swp
+build/
+debug/
+

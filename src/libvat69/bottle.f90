@@ -1,0 +1,26 @@
+module bottle_m
+    use iso_c_binding
+    implicit none
+contains
+    subroutine bottle(beer, nbottles, bottles) bind(c)
+        real(C_FLOAT), value :: beer
+        integer(C_INT), value :: nbottles
+        type(C_PTR), value :: bottles
+        integer(C_INT), dimension(:), pointer :: fbottles
+        integer :: i, n
+
+        call c_f_pointer(bottles, fbottles, (/nbottles/))
+
+        fbottles = 0 ! all empty
+        n = floor(beer/0.33)
+
+!$OMP PARALLEL DO
+        do i = 1, n
+            if (i > nbottles) then
+                stop "Catastrophy: overspill"
+            end if
+            fbottles(i) = 1
+        end do
+!$OMP END PARALLEL DO
+    end subroutine
+end module
