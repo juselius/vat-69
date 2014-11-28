@@ -13,13 +13,12 @@ contains
 
         n = floor(beer/0.33)
 
-!$OMP PARALLEL DO
+!$OMP PARALLEL DO SHARED(n, fbottles)
         do i = 1, n
-            k = i
             if (i > nbottles) then
                 stop "Catastrophy: overspill"
             end if
-            fbottles(k) = 1
+            fbottles(i) = 1
         end do
 !$OMP END PARALLEL DO
     end subroutine
