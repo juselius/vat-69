@@ -7,7 +7,7 @@ contains
         integer(C_INT), value :: nbottles
         type(C_PTR), value :: bottles
         integer(C_INT), dimension(:), pointer :: fbottles
-        integer :: i, n
+        integer :: i, k, n
 
         call c_f_pointer(bottles, fbottles, (/nbottles/))
 
@@ -15,10 +15,11 @@ contains
 
 !$OMP PARALLEL DO
         do i = 1, n
+            k = i
             if (i > nbottles) then
                 stop "Catastrophy: overspill"
             end if
-            fbottles(i) = 1
+            fbottles(k) = 1
         end do
 !$OMP END PARALLEL DO
     end subroutine

@@ -3,15 +3,19 @@ program vat69
     use barrel_class
     implicit none
 
-    integer :: nbottles
+    integer :: i, nbottles
+    real :: fac
     type(barrel_t) :: vat
 
-    nbottles = brew_beer(100.0, 0.5, 500.0)
+    call vat%init(69.0)
 
-    call vat%init(119.24)
-    call vat%distil(2, 52.0)
-
-
-    print *, "22 bottles of beer and vat 69.", vat%get_no()
+    do i=1, 10
+        call vat%distil(820.0 * i)
+        fac = 0.1 * i
+        nbottles = brew_beer(2.0*fac, 0.45*fac, 8.4*fac)
+        print '(x,i2,a,i2,a)', nbottles, " bottles of beer and ", &
+            vat%get_nvats(), " vats of whiskey..."
+    end do
+    print *, "... and two dunken sailors."
 end program
 
