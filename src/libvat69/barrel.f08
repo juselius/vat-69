@@ -3,7 +3,7 @@ module barrel_class
 
     type, public :: barrel_t
         private
-        real :: barrel_no
+        real :: vat_no
         real :: vol
         real :: strength
     contains
@@ -29,7 +29,7 @@ contains
     function get_no(this) result(r)
         class(barrel_t), intent(in) :: this
         real :: r
-        r = this%barrel_no
+        r = this%vat_no
     end function
 
     function get_vol(this) result(r)
