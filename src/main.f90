@@ -12,6 +12,6 @@ program vat69
     call vat%distil(2, 52.0)
 
 
-    print *, "22 bottles of beer and vat 69.", vat%vat_no
+    print *, "22 bottles of beer and vat 69.", vat%get_no()
 end program
 
