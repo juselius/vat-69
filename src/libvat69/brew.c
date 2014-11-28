@@ -18,14 +18,15 @@ int brew_beer(float barley, float hops, float water) {
         printf("Whoa! Feeling bitter?\n");
     }
 
-    nbottles = 22;
-    bottles = (int *) malloc((sizeof(float) * nbottles - 1));
     vol = water * 0.9;
+    nbottles = vol/0.33;
+    bottles = (int *) malloc((sizeof(float) * nbottles));
 
     bottle(vol, nbottles, bottles);
     n = 0;
     for (i=0; i < nbottles; i++) {
         if (bottles[i] == 1) n++;
     }
+    free(bottles);
     return n;
 }
