@@ -5,4 +5,4 @@
 
 void bottle(float beer, int nbottles, int *bottles);
 
-#endif /* BOTTLE_H /*
+#endif /* BOTTLE_H */
