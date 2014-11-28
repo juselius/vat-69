@@ -3,13 +3,14 @@ module barrel_class
 
     type, public :: barrel_t
         private
-        real :: vat_no
+        integer :: nvats
         real :: vol
         real :: strength
+        real, dimension(:,:), allocatable :: vat
     contains
         procedure :: init => barrel_init
         procedure :: del => barrel_del
-        procedure :: get_no
+        procedure :: get_nvats
         procedure :: get_vol
         procedure :: get_strength
         procedure :: distil
@@ -17,37 +18,44 @@ module barrel_class
 
     private
 contains
-    subroutine barrel_init(this, vol)
-        real, intent(in) :: vol
+    subroutine barrel_init(this, strength)
+        real, intent(in) :: strength
         class(barrel_t), intent(out) :: this
+        this%vol = 119.2
+        this%strength = strength
     end subroutine
 
     subroutine barrel_del(this)
         class(barrel_t), intent(out) :: this
+        if (allocated(this%vat)) deallocate(this%vat)
     end subroutine
 
-    function get_no(this) result(r)
+    function get_nvats(this) result(n)
         class(barrel_t), intent(in) :: this
-        real :: r
-        r = this%vat_no
+        integer :: n
+        n = this%nvats
     end function
 
-    function get_vol(this) result(r)
+    function get_vol(this) result(v)
         class(barrel_t), intent(in) :: this
-        real :: r
-        r = this%vol
+        real :: v
+        v = this%vol
     end function
 
-    function get_strength(this) result(r)
+    function get_strength(this) result(s)
         class(barrel_t), intent(in) :: this
-        real :: r
-        r = this%strength
+        real :: s
+        s = this%strength
     end function
 
-    subroutine distil(this, nbarrels, strength)
+    subroutine distil(this, volume)
         class(barrel_t), intent(inout) :: this
-        integer, intent(in) :: nbarrels
-        real, intent(in) :: strength
+        real, intent(in) :: volume
+
+        if (allocated(this%vat)) deallocate(this%vat)
+        this%nvats = ceiling(volume/this%vol)
+
+        allocate(this%vat(this%nvats, this%nvats))
     end subroutine
 
 end module

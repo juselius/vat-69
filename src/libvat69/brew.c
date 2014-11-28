@@ -8,14 +8,18 @@ int brew_beer(float barley, float hops, float water) {
     int i, n, nbottles;
 
     if (water/barley > 10.0) {
-        printf("Are you kidding me? Budwiser?\n");
+        printf("There is less water in the Atlatic...\n");
+    } else if (water/barley < 2.5) {
+        printf("Are you making porridge?\n");
     }
-    if (water/hops > 1234.0) {
+    if (water/hops > 20.0) {
+        printf("Are you kidding me? Budwiser?\n");
+    } else if (water/hops < 10.0) {
         printf("Whoa! Feeling bitter?\n");
     }
 
     nbottles = 22;
-    bottles = (int *) malloc((sizeof(float) * nbottles));
+    bottles = (int *) malloc((sizeof(float) * nbottles - 1));
     vol = water * 0.9;
 
     bottle(vol, nbottles, bottles);
