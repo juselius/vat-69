@@ -11,7 +11,6 @@ contains
 
         call c_f_pointer(bottles, fbottles, (/nbottles/))
 
-        fbottles = 0 ! all empty
         n = floor(beer/0.33)
 
 !$OMP PARALLEL DO
