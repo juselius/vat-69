@@ -16,6 +16,5 @@ program vat69
         print '(x,i2,a,i2,a)', nbottles, " bottles of beer and ", &
             vat%get_nvats(), " vats of whiskey..."
     end do
-    print *, "... and two dunken sailors."
+    print *, "... and two drunken sailors."
 end program
-
